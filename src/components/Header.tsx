@@ -38,7 +38,7 @@ const Header = () => {
           </Link>
           
           {/* Link Đăng ký */}
-          <Link href="/signup" passHref>
+          <Link href="/register" passHref>
             <Button color="inherit" variant="contained" sx={{ textTransform: 'none', backgroundColor: '#ff9800' }}>
               Đăng ký
             </Button>

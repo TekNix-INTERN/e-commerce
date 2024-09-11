@@ -80,7 +80,7 @@ const Card = styled(MuiCard)(({ theme }) => ({
             </Button>
             <Typography textAlign="center" >
             Already have an account?{" "}
-              <Link href="/signup" variant="body2">
+              <Link href="/register" variant="body2">
                 Sign up
               </Link>
             </Typography>

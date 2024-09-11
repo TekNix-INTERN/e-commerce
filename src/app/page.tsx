@@ -2,7 +2,7 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Header from '../components/Header';
-// import Footer from '../components/Footer';
+import Footer from '../components/Footer';
 
 const Home = () => {
   return (
@@ -21,7 +21,7 @@ const Home = () => {
       </Container>
       
       {/* Footer */}
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };

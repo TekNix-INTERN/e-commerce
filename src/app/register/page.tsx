@@ -11,7 +11,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/system";
 import GoogleIcon from '@mui/icons-material/Google';
-import FacebookIcon from '@mui/icons-material/Facebook';
+import FacebookIcon from "@mui/icons-material/Facebook";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -40,7 +40,7 @@ export default function SignUpCard() {
           variant="h4"
           sx={{ fontSize: "clamp(1.5rem, 5vw, 2rem)", textAlign: "center" }}
         >
-          Sign up
+          Đăng ký
         </Typography>
         <Box
           component="form"
@@ -48,62 +48,62 @@ export default function SignUpCard() {
           sx={{ display: "flex", flexDirection: "column", gap: 2 }}
         >
           <FormControl>
-            <FormLabel>User Name</FormLabel>
+            <FormLabel>Tên người dùng</FormLabel>
             <TextField
               id="username"
               type="text"
-              placeholder="Enter Your Username"
+              placeholder="Nhập tên người dùng của bạn"
               fullWidth
               required
             />
           </FormControl>
           <FormControl>
-            <FormLabel>Password</FormLabel>
+            <FormLabel>Mật khẩu</FormLabel>
             <TextField
               id="password"
               type="password"
-              placeholder="Enter Your Password"
+              placeholder="Nhập mật khẩu của bạn"
               fullWidth
               required
             />
           </FormControl>
           <FormControl>
-            <FormLabel>Confirm Password</FormLabel>
+            <FormLabel>Xác nhận mật khẩu</FormLabel>
             <TextField
               id="confirmpassword"
               type="password"
-              placeholder="Confirm Your Password"
+              placeholder="Xác nhận mật khẩu của bạn"
               fullWidth
               required
             />
           </FormControl>
           <FormControl>
-            <FormLabel>Your Email</FormLabel>
+            <FormLabel>Email của bạn</FormLabel>
             <TextField
               id="email"
               type="email"
-              placeholder="Enter Your Email"
+              placeholder="Nhập email của bạn"
               fullWidth
               required
             />
           </FormControl>
           <Button type="submit" fullWidth variant="contained">
-            Sign up
+            Đăng ký
           </Button>
-          <Typography textAlign="center" >
-            Already have an account?{" "}
+          <Typography textAlign="center">
+            Đã có tài khoản?{" "}
             <Link href="/login" variant="body2">
-              Go to login
+              Đến trang đăng nhập
             </Link>
           </Typography>
         </Box>
-        <Divider>or</Divider>
+        <Divider>hoặc</Divider>
         <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
           <Button fullWidth variant="outlined" startIcon={<GoogleIcon />}>
-            Sign in with Google
+            Đăng nhập với Google
           </Button>
           <Button fullWidth variant="outlined" startIcon={<FacebookIcon />}>
-            Sign in with Facebook
+            Đăng nhập với Facebook
           </Button>
         </Box>
       </Card>

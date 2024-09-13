@@ -12,6 +12,17 @@ import Typography from "@mui/material/Typography";
 import { styled } from "@mui/system";
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from "@mui/icons-material/Facebook";
+import { signIn } from "next-auth/react";
+
+// Định nghĩa màu sắc
+const colors = {
+  primary: "#1976d2", // Màu chính
+  secondary: "#dc004e", // Màu phụ
+  background: "#fff", // Màu nền
+  textPrimary: "#000", // Màu chữ chính
+  textSecondary: "#fff", // Màu chữ phụ
+  border: "#e0e0e0" // Màu đường viền
+};
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -20,7 +31,9 @@ const Card = styled(MuiCard)(({ theme }) => ({
   gap: theme.spacing(2),
   width: "100%",
   maxWidth: "450px",
-  boxSizing: "border-box",
+  backgroundColor: colors.background,
+  borderRadius: theme.shape.borderRadius,
+
 }));
 
 export default function SignUpCard() {
@@ -87,23 +100,35 @@ export default function SignUpCard() {
               required
             />
           </FormControl>
-          <Button type="submit" fullWidth variant="contained">
+          <Button type="submit" fullWidth variant="contained" sx={{ backgroundColor: colors.primary }}>
             Đăng ký
           </Button>
           <Typography textAlign="center">
             Đã có tài khoản?{" "}
-            <Link href="/login" variant="body2">
+            <Link href="/login" variant="body2" sx={{ color: colors.primary }}>
               Đến trang đăng nhập
             </Link>
           </Typography>
         </Box>
-        <Divider>hoặc</Divider>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-          <Button fullWidth variant="outlined" startIcon={<GoogleIcon />}>
-            Đăng nhập với Google
+        <Divider sx={{ borderColor: colors.primary }}>hoặc</Divider>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          <Button
+            fullWidth
+            variant="outlined"
+            startIcon={<GoogleIcon />}
+            onClick={() => signIn('google')}
+            sx={{ color: colors.textPrimary, borderColor: colors.primary }}
+          >
+            Đăng Ký với Google
           </Button>
-          <Button fullWidth variant="outlined" startIcon={<FacebookIcon />}>
-            Đăng nhập với Facebook
+          <Button
+            fullWidth
+            variant="outlined"
+            startIcon={<FacebookIcon />}
+            onClick={() => signIn('facebook')}
+            sx={{ color: colors.textPrimary, borderColor: colors.primary }}
+          >
+            Đăng Ký với Facebook
           </Button>
         </Box>
       </Card>

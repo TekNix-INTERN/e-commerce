@@ -21,12 +21,12 @@ import { signIn } from "next-auth/react";
 
 // Định nghĩa màu sắc
 const colors = {
-  primary: "#1976d2", // Màu xanh dương chính
-  secondary: "#dc004e", // Màu hồng đậm
-  background: "", // Màu nền
-  textPrimary: "#000", // Màu chữ chính
-  textSecondary: "#fff", // Màu chữ phụ
-  border: "#e0e0e0" // Màu viền
+  primary: "#1976d2", 
+  secondary: "#dc004e",
+  background: "", 
+  textPrimary: "#000", 
+  textSecondary: "#fff", 
+  border: "#e0e0e0"
 };
 
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -40,7 +40,7 @@ const Card = styled(MuiCard)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius
 }));
 
-export default function SignInCard() {
+export default function LoginCard() {
   return (
     <Box
       sx={{
@@ -147,6 +147,7 @@ export default function SignInCard() {
             fullWidth
             variant="outlined"
             startIcon={<FacebookIcon />}
+            onClick={() => signIn('facebook')}
             sx={{ color: colors.textPrimary, borderColor: colors.primary }}
           >
             Đăng nhập với Facebook

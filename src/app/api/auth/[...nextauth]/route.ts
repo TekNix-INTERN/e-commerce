@@ -1,10 +1,8 @@
-// src/app/api/auth/[...nextauth]/route.ts
-
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import FacebookProvider from 'next-auth/providers/facebook';
 
-// Cấu hình NextAuth với Google và Facebook Providers
+
 const authOptions = {
   providers: [
     GoogleProvider({
@@ -16,7 +14,9 @@ const authOptions = {
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
     }),
   ],
-  // Các tùy chọn khác nếu cần
 };
 
-export default NextAuth(authOptions);
+const handler = NextAuth(authOptions);
+
+// Xuất handler cho các phương thức GET và POST
+export { handler as GET, handler as POST };

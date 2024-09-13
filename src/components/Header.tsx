@@ -46,12 +46,12 @@ const Header = () => {
           </Link>
 
           {/* Biểu tượng giỏ hàng */}
-          <Button color="inherit" sx={{ textTransform: 'none' }}>
+         <Link href="/cart"> <Button color="inherit" sx={{ textTransform: 'none' }}>
             <ShoppingCartIcon />
             <Typography variant="body2" sx={{ ml: 1 }}>
               3
             </Typography>
-          </Button>
+          </Button></Link>
         </Box>
       </Toolbar>
     </AppBar>

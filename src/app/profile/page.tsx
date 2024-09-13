@@ -1,4 +1,3 @@
-// app/profile/page.tsx
 import {
     Container,
     Box,

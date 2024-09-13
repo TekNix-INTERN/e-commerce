@@ -24,7 +24,7 @@ const Header = () => {
         {/* Các nút điều hướng */}
         <Box sx={{ display: 'flex', gap: 2 }}>
         <Link href="/"> <Button color="inherit" sx={{ textTransform: 'none' }}>Trang chủ</Button></Link>
-          <Button color="inherit" sx={{ textTransform: 'none' }}>Sản phẩm</Button>
+          
           <Link href="/contact"> <Button color="inherit" sx={{ textTransform: 'none' }}>Liên hệ</Button></Link>
          <Link href="/profile"> <Button color="inherit" sx={{ textTransform: 'none' }}>Hồ Sơ</Button> </Link>
         </Box>

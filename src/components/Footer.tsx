@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <Box component="footer" sx={{ backgroundColor: '#f9f9f9', py: 6 }}>
       <Container>
-        <Grid container spacing={4}>
+        <Grid container spacing={4} sx={{color:"black"}}>
           {/* Menu Categories */}
           <Grid item xs={12} sm={6} md={3}>
             <Typography variant="h6" gutterBottom>Sản phẩm</Typography>
@@ -41,7 +41,7 @@ const Footer = () => {
         </Grid>
 
         {/* Footer bottom */}
-        <Box mt={4} textAlign="center">
+        <Box mt={4} textAlign="center" sx={{color:"black"}}>
           <Typography variant="body2">
             Bản quyền ©2024 Tất cả quyền được bảo lưu | Mẫu này được tạo bởi <Link href="https://colorlib.com" underline="hover">Colorlib</Link>
           </Typography>

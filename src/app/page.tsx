@@ -22,16 +22,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-const danhMuc = [
-  "TẤT CẢ SẢN PHẨM",
-  "PC GIÁ RẺ",
-  "LAPTOP",
-  "MACBOOK, IMAC",
-  "LINH KIỆN MÁY TÍNH",
-  "BÀN, GHẾ GAMING",
-  "GEAR",
-];
-
 // Định nghĩa kiểu Product cho sản phẩm
 interface Product {
   id: number;
@@ -42,18 +32,28 @@ interface Product {
   image: string;
 }
 
+// 2. Component Definition
 const Home = () => {
   const [danhMucChon, setDanhMucChon] = useState<string | null>(null);
   const [timKiem, setTimKiem] = useState<string>("");
   const [sanPham, setSanPham] = useState<Product[]>([]);
+  const [danhMuc, setDanhMuc] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
 
+  // Fetch products from API
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("https://fakestoreapi.com/products");
-        setSanPham(response.data);
+        const response = await axios.get<Product[]>(
+          "https://fakestoreapi.com/products"
+        );
+        const products = response.data;
+        setSanPham(products);
+        const categories = products.map((p) => p.category);
+        const uniqueCategories = Array.from(new Set(categories));
+        setDanhMuc(uniqueCategories);
+
         setLoading(false);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -64,6 +64,7 @@ const Home = () => {
     fetchProducts();
   }, []);
 
+  // Event Handlers
   const handleDanhMucClick = (category: string) => {
     setDanhMucChon(category === danhMucChon ? null : category);
   };
@@ -82,6 +83,7 @@ const Home = () => {
     router.push(`/product/${id}`);
   };
 
+  // Render Method
   return (
     <>
       <Head>
@@ -96,7 +98,7 @@ const Home = () => {
             <CardMedia
               component="img"
               height="300"
-              image="/images/banner.jpg"
+              image="/images/Bannerr.png"
               alt="Banner thương mại điện tử"
             />
           </Card>
@@ -113,7 +115,11 @@ const Home = () => {
                       onClick={() => handleDanhMucClick(category)}
                       selected={danhMucChon === category}
                     >
-                      <ListItemText primary={category} />
+                      <ListItemText
+                        primary={`${category} (${
+                          sanPham.filter((p) => p.category === category).length
+                        })`}
+                      />
                     </ListItemButton>
                   </ListItem>
                 ))}
@@ -127,7 +133,24 @@ const Home = () => {
                 fullWidth
                 value={timKiem}
                 onChange={(e) => setTimKiem(e.target.value)}
-                sx={{ mb: 4 }}
+                sx={{
+                  mb: 4,
+                  "& .MuiOutlinedInput-root": {
+                    bgcolor: "#bdbdbd", // Thay đổi màu nền của ô tìm kiếm
+                    "& fieldset": {
+                      borderColor: "#ff5722",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "#ff5722", 
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "#ff5722", 
+                    },
+                  },
+                  "& .MuiInputAdornment-root .MuiSvgIcon-root": {
+                    color: "#263238", 
+                  },
+                }}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
@@ -155,12 +178,12 @@ const Home = () => {
                     <Grid item key={product.id} xs={12} sm={6} md={4}>
                       <Card
                         sx={{
-                          height: '100%',
-                          display: 'flex',
-                          flexDirection: 'column',
-                          transition: 'transform 0.3s, box-shadow 0.3s',
-                          '&:hover': {
-                            transform: 'scale(1.05)',
+                          height: "100%",
+                          display: "flex",
+                          flexDirection: "column",
+                          transition: "transform 0.3s, box-shadow 0.3s",
+                          "&:hover": {
+                            transform: "scale(1.05)",
                             boxShadow: 3,
                           },
                         }}
@@ -168,8 +191,8 @@ const Home = () => {
                         <CardMedia
                           component="img"
                           sx={{
-                            height: 200, // Đảm bảo tất cả hình ảnh có chiều cao cố định
-                            objectFit: 'cover', // Đảm bảo hình ảnh không bị biến dạng
+                            height: 200,
+                            objectFit: "cover",
                           }}
                           image={product.image}
                           alt={product.title}
@@ -185,11 +208,21 @@ const Home = () => {
                           <Typography variant="body2" color="text.secondary">
                             {product.description}
                           </Typography>
+                          <Typography
+                            variant="h6"
+                            component="div"
+                            sx={{ mt: 2 }}
+                          >
+                            {product.price.toLocaleString("vi-VN", {
+                              style: "currency",
+                              currency: "VND",
+                            })}
+                          </Typography>
                         </CardContent>
                         <CardActions
                           sx={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
+                            display: "flex",
+                            justifyContent: "space-between",
                             px: 2,
                             pb: 2,
                           }}
@@ -198,9 +231,9 @@ const Home = () => {
                             size="small"
                             onClick={() => handleViewDetails(product.id)}
                             sx={{
-                              backgroundColor: '#ff5722',
-                              color: 'white',
-                              '&:hover': { backgroundColor: '#e64a19' },
+                              backgroundColor: "#ff5722",
+                              color: "white",
+                              "&:hover": { backgroundColor: "#e64a19" },
                             }}
                           >
                             Xem chi tiết
@@ -208,9 +241,9 @@ const Home = () => {
                           <Button
                             size="small"
                             sx={{
-                              backgroundColor: '#ff5722',
-                              color: 'white',
-                              '&:hover': { backgroundColor: '#e64a19' },
+                              backgroundColor: "#ff5722",
+                              color: "white",
+                              "&:hover": { backgroundColor: "#e64a19" },
                             }}
                           >
                             Thêm vào giỏ hàng
@@ -222,7 +255,7 @@ const Home = () => {
                 ) : (
                   <Typography
                     variant="body1"
-                    sx={{ textAlign: 'center', width: '100%' }}
+                    sx={{ textAlign: "center", width: "100%" }}
                   >
                     Không có sản phẩm nào trong danh mục này.
                   </Typography>

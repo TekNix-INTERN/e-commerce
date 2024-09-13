@@ -3,11 +3,12 @@ import { Container, Grid, Typography, Paper, Box, Button, Select, MenuItem, Text
 import Image from 'next/image';
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import Link from "next/link";
 
 const items = [
-  { id: 1, name: 'Áo thun cotton', price: 44.00, imgSrc: 'https://i.imgur.com/1GrakTl.jpg' },
-  { id: 2, name: 'Áo thun cotton', price: 44.00, imgSrc: 'https://i.imgur.com/ba3tvGm.jpg' },
-  { id: 3, name: 'Áo thun cotton', price: 44.00, imgSrc: 'https://i.imgur.com/pHQ3xT3.jpg' },
+  { id: 1, name: 'Áo thun cotton', price: 44.00, img:'/images/image.png' },
+  { id: 1, name: 'Áo thun cotton', price: 44.00, img:'/images/image.png' },
+  { id: 1, name: 'Áo thun cotton', price: 44.00, img:'/images/image.png' },
 ];
 
 export default function Cart() {
@@ -29,7 +30,7 @@ export default function Cart() {
                 <Grid container spacing={2} alignItems="center">
                   <Grid item xs={4} md={3}>
                     <Image
-                      src={item.imgSrc}
+                      src={item.img}
                       alt={item.name}
                       width={200} // Đặt chiều rộng cố định cho hình ảnh
                       height={200} // Đặt chiều cao cố định cho hình ảnh
@@ -55,9 +56,9 @@ export default function Cart() {
               </Paper>
             ))}
             
-            <Button href="#" variant="text" sx={{ marginTop: 2 }}>
+            <Link href="/"><Button href="#" variant="text" sx={{ marginTop: 2 }}>
                Quay lại cửa hàng
-            </Button>
+            </Button></Link>
           </Grid>
 
           <Grid item md={4} sx={{ marginBottom: 4, color: "black" }}>

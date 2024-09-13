@@ -45,7 +45,7 @@ interface Product {
 const Home = () => {
   const [danhMucChon, setDanhMucChon] = useState<string | null>(null);
   const [timKiem, setTimKiem] = useState<string>("");
-  const [sanPham, setSanPham] = useState<Product[]>([]); // Thay any[] bằng Product[]
+  const [sanPham, setSanPham] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
 

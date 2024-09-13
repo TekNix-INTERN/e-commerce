@@ -20,6 +20,7 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const danhMuc = [
   "TẤT CẢ SẢN PHẨM",
@@ -36,11 +37,12 @@ const Home = () => {
   const [timKiem, setTimKiem] = useState<string>("");
   const [sanPham, setSanPham] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("https://fakestoreapi.com/products"); // Link API sản phẩm
+        const response = await axios.get("https://fakestoreapi.com/products");
         setSanPham(response.data);
         setLoading(false);
       } catch (error) {
@@ -53,7 +55,7 @@ const Home = () => {
   }, []);
 
   const handleDanhMucClick = (category: string) => {
-    setDanhMucChon(category === danhMucChon ? null : category); // Toggle danh mục
+    setDanhMucChon(category === danhMucChon ? null : category);
   };
 
   const filteredProducts = sanPham
@@ -66,6 +68,10 @@ const Home = () => {
         : true
     );
 
+  const handleViewDetails = (id: number) => {
+    router.push(`/product/${id}`);
+  };
+
   return (
     <>
       <Head>
@@ -73,23 +79,19 @@ const Home = () => {
       </Head>
 
       <div>
-        {/* Header */}
         <Header />
 
-        {/* Nội dung chính */}
         <Container maxWidth="lg" sx={{ my: 4 }}>
-          {/* Banner */}
           <Card sx={{ mb: 4 }}>
             <CardMedia
               component="img"
               height="300"
-              image="/images/banner.jpg" // Thay thế bằng ảnh banner của bạn
+              image="/images/banner.jpg"
               alt="Banner thương mại điện tử"
             />
           </Card>
 
           <Grid container spacing={2}>
-            {/* Sidebar danh mục */}
             <Grid item xs={12} sm={4} md={3}>
               <Typography variant="h5" component="h2" gutterBottom>
                 Danh mục sản phẩm
@@ -108,9 +110,7 @@ const Home = () => {
               </List>
             </Grid>
 
-            {/* Nội dung sản phẩm */}
             <Grid item xs={12} sm={8} md={9}>
-              {/* Ô tìm kiếm sản phẩm */}
               <TextField
                 label="Tìm kiếm sản phẩm"
                 variant="outlined"
@@ -127,7 +127,6 @@ const Home = () => {
                 }}
               />
 
-              {/* Danh sách sản phẩm */}
               <Typography variant="h5" component="h2" gutterBottom>
                 {danhMucChon && danhMucChon !== "TẤT CẢ SẢN PHẨM"
                   ? `Sản phẩm thuộc danh mục: ${danhMucChon}`
@@ -156,7 +155,7 @@ const Home = () => {
                         <CardMedia
                           component="img"
                           height="200"
-                          image={product.image} // Đảm bảo có ảnh sản phẩm từ API
+                          image={product.image}
                           alt={product.title}
                         />
                         <CardContent
@@ -183,6 +182,7 @@ const Home = () => {
                         >
                           <Button
                             size="small"
+                            onClick={() => handleViewDetails(product.id)}
                             sx={{
                               backgroundColor: "#ff5722",
                               color: "white",
@@ -218,7 +218,6 @@ const Home = () => {
           </Grid>
         </Container>
 
-        {/* Footer */}
         <Footer />
       </div>
     </>

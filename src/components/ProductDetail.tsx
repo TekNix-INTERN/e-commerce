@@ -1,5 +1,6 @@
 // components/ProductDetail.tsx
 import { Typography, Grid, Button, Card, CardContent, CardMedia } from '@mui/material';
+import Link from 'next/link';
 
 interface Product {
   id: number;
@@ -38,9 +39,9 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
             <Typography variant="body1" paragraph>
               {product.description}
             </Typography>
-            <Button variant="contained" color="primary">
+           <Link href="/cart"> <Button variant="contained" color="primary">
               Add to Cart
-            </Button>
+            </Button></Link>
           </CardContent>
         </Grid>
       </Grid>

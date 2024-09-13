@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Grid, Typography, Paper, Box, Button, Select, MenuItem, TextField } from "@mui/material";
+import Image from 'next/image';
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
@@ -20,14 +21,20 @@ export default function Cart() {
               Giỏ hàng
             </Typography>
             <Typography variant="body2" color="textSecondary" gutterBottom>
-              3 sản phẩm
+              {items.length} sản phẩm
             </Typography>
             
             {items.map(item => (
               <Paper key={item.id} variant="outlined" sx={{ padding: 2, marginBottom: 2, backgroundColor: '#ffffff' }}>
                 <Grid container spacing={2} alignItems="center">
                   <Grid item xs={4} md={3}>
-                    <img src={item.imgSrc} alt={item.name} style={{ width: '100%', borderRadius: 4 }} />
+                    <Image
+                      src={item.imgSrc}
+                      alt={item.name}
+                      width={200} // Đặt chiều rộng cố định cho hình ảnh
+                      height={200} // Đặt chiều cao cố định cho hình ảnh
+                      style={{ borderRadius: 4 }}
+                    />
                   </Grid>
                   <Grid item xs>
                     <Typography variant="body2" color="textSecondary">Áo</Typography>
@@ -60,7 +67,7 @@ export default function Cart() {
             <hr />
             <Grid container spacing={2}>
               <Grid item xs>
-                <Typography variant="body2">SẢN PHẨM 3</Typography>
+                <Typography variant="body2">SẢN PHẨM {items.length}</Typography>
               </Grid>
               <Grid item xs textAlign="right">
                 <Typography variant="body2"></Typography>
@@ -79,7 +86,7 @@ export default function Cart() {
                 <Typography variant="body2">TỔNG CỘNG</Typography>
               </Grid>
               <Grid item xs textAlign="right">
-                <Typography variant="body2">${items.length * items[0].price + 5.00}</Typography>
+                <Typography variant="body2">${items.reduce((total, item) => total + item.price, 0) + 5.00}</Typography>
               </Grid>
             </Grid>
             <Button variant="contained" color="primary" fullWidth sx={{ marginTop: 2 }}>

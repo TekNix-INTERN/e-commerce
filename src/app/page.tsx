@@ -32,10 +32,20 @@ const danhMuc = [
   "GEAR",
 ];
 
+// Định nghĩa kiểu Product cho sản phẩm
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+}
+
 const Home = () => {
   const [danhMucChon, setDanhMucChon] = useState<string | null>(null);
   const [timKiem, setTimKiem] = useState<string>("");
-  const [sanPham, setSanPham] = useState<any[]>([]);
+  const [sanPham, setSanPham] = useState<Product[]>([]); // Thay any[] bằng Product[]
   const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
 

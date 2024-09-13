@@ -145,25 +145,28 @@ const Home = () => {
                     <Grid item key={product.id} xs={12} sm={6} md={4}>
                       <Card
                         sx={{
-                          transition: "transform 0.3s, box-shadow 0.3s",
-                          "&:hover": {
-                            transform: "scale(1.05)",
+                          height: '100%',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          transition: 'transform 0.3s, box-shadow 0.3s',
+                          '&:hover': {
+                            transform: 'scale(1.05)',
                             boxShadow: 3,
                           },
                         }}
                       >
                         <CardMedia
                           component="img"
-                          height="200"
+                          sx={{
+                            height: 200, // Đảm bảo tất cả hình ảnh có chiều cao cố định
+                            objectFit: 'cover', // Đảm bảo hình ảnh không bị biến dạng
+                          }}
                           image={product.image}
                           alt={product.title}
                         />
                         <CardContent
                           sx={{
-                            minHeight: 150,
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "space-between",
+                            flexGrow: 1,
                           }}
                         >
                           <Typography variant="h6" component="div">
@@ -175,18 +178,19 @@ const Home = () => {
                         </CardContent>
                         <CardActions
                           sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
+                            display: 'flex',
+                            justifyContent: 'space-between',
                             px: 2,
+                            pb: 2,
                           }}
                         >
                           <Button
                             size="small"
                             onClick={() => handleViewDetails(product.id)}
                             sx={{
-                              backgroundColor: "#ff5722",
-                              color: "white",
-                              "&:hover": { backgroundColor: "#e64a19" },
+                              backgroundColor: '#ff5722',
+                              color: 'white',
+                              '&:hover': { backgroundColor: '#e64a19' },
                             }}
                           >
                             Xem chi tiết
@@ -194,9 +198,9 @@ const Home = () => {
                           <Button
                             size="small"
                             sx={{
-                              backgroundColor: "#ff5722",
-                              color: "white",
-                              "&:hover": { backgroundColor: "#e64a19" },
+                              backgroundColor: '#ff5722',
+                              color: 'white',
+                              '&:hover': { backgroundColor: '#e64a19' },
                             }}
                           >
                             Thêm vào giỏ hàng
@@ -208,7 +212,7 @@ const Home = () => {
                 ) : (
                   <Typography
                     variant="body1"
-                    sx={{ textAlign: "center", width: "100%" }}
+                    sx={{ textAlign: 'center', width: '100%' }}
                   >
                     Không có sản phẩm nào trong danh mục này.
                   </Typography>

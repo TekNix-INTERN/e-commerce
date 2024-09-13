@@ -1,5 +1,4 @@
-"use client";
-
+"use client"
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -20,12 +19,12 @@ import { signIn } from "next-auth/react";
 
 // Định nghĩa màu sắc
 const colors = {
-  primary: "#1976d2", 
-  secondary: "#dc004e",
-  background: "", 
-  textPrimary: "#000", 
-  textSecondary: "#fff", 
-  border: "#e0e0e0"
+  primary: "#1976d2", // Màu chính
+  secondary: "#dc004e", // Màu phụ
+  background: "#fff", // Màu nền
+  textPrimary: "#000", // Màu chữ chính
+  textSecondary: "#fff", // Màu chữ phụ
+  border: "#e0e0e0" 
 };
 
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -37,6 +36,26 @@ const Card = styled(MuiCard)(({ theme }) => ({
   maxWidth: "450px",
   backgroundColor: colors.background,
   borderRadius: theme.shape.borderRadius
+}));
+
+const CustomButton = styled(Button)(({ theme }) => ({
+  background: "#fff",
+  fontSize: "14px",
+  marginTop: theme.spacing(2),
+  padding: theme.spacing(2, 4),
+  borderRadius: "26px",
+  border: `1px solid ${colors.border}`,
+  textTransform: "uppercase",
+  fontWeight: 700,
+  color: colors.textPrimary,
+  boxShadow: "0px 2px 2px #5C5696",
+  cursor: "pointer",
+  transition: ".2s",
+  "&:hover": {
+    borderColor: colors.primary,
+    backgroundColor: colors.primary,
+    color: "#fff",
+  }
 }));
 
 export default function LoginCard() {
@@ -121,9 +140,9 @@ export default function LoginCard() {
             </Button>
           </Box>
 
-          <Button type="submit" fullWidth variant="contained" sx={{ backgroundColor: colors.primary }}>
+          <CustomButton type="submit" fullWidth>
             Đăng Nhập
-          </Button>
+          </CustomButton>
           <Typography textAlign="center" sx={{ color: colors.textPrimary }}>
             Bạn đã có tài khoản?{" "}
             <Link href="/register" variant="body2" sx={{ color: colors.primary }}>
@@ -131,28 +150,26 @@ export default function LoginCard() {
             </Link>
           </Typography>
         </Box>
-        <Divider sx={{ borderColor: colors.primary }}>hoặc</Divider>
+       <Divider sx={{ borderColor: colors.primary }}>hoặc</Divider>
         <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-          <Button
+          <CustomButton
             fullWidth
             variant="outlined"
             startIcon={<GoogleIcon />}
             onClick={() => signIn('google')}
-            sx={{ color: colors.textPrimary, borderColor: colors.primary }}
           >
             Đăng nhập với Google
-          </Button>
-          <Button
+          </CustomButton>
+          <CustomButton
             fullWidth
             variant="outlined"
             startIcon={<FacebookIcon />}
             onClick={() => signIn('facebook')}
-            sx={{ color: colors.textPrimary, borderColor: colors.primary }}
           >
             Đăng nhập với Facebook
-          </Button>
+          </CustomButton>
         </Box>
-      </Card>
+      </Card> 
     </Box>
   );
 }
